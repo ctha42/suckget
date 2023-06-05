@@ -12,17 +12,20 @@ int main(int argc, char *argv[]){
         fprintf(stderr, "Failed to initialize CURL\n");
         return 2;
     }
+
+    curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1L);
+    /* It may be wise to remove support for multiple URLs at once. This would
+    make the code simplier and be more in line with the unix philosophy */
     for (int i = 0; i < argc - 1; i++){
             CURLcode res;
-            long http_code = 0;
             char errbuf[CURL_ERROR_SIZE];
-            curl_easy_setopt(curl, CURLOPT_URL, argv[i + 1]);
-            curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1L);
             curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errbuf);
+            curl_easy_setopt(curl, CURLOPT_URL, argv[i + 1]);
             res = curl_easy_perform(curl); // Perform the operation
-            curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &http_code);
             if (res != CURLE_OK){
                 if (res == CURLE_HTTP_RETURNED_ERROR){
+                    long http_code = 0;
+                    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
                     fprintf(stderr, "HTTP Error: %lu\n", http_code);
                 }
                 else{ 
