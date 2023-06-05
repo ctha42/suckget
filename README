@@ -1,0 +1,7 @@
+suckget
+============================
+A (semi) suckless file downloader
+
+Usage
+-----------
+suckget can take an infinite amount of URLs as arguments. They are snatched using libcurl and then printed to stdout. That is it, what you do with your output is up to you.
