@@ -37,4 +37,5 @@ int main(int argc, char *argv[]){
         }
     }
     curl_easy_cleanup(curl);
+    return 0;
 }
