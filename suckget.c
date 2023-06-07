@@ -23,6 +23,7 @@ int main(int argc, char *argv[]){
             long http_code = 0;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
             fprintf(stderr, "HTTP Error: %lu\n", http_code);
+            return 3;
         }
         else{
             // Error handling for internal curl errors
@@ -32,6 +33,7 @@ int main(int argc, char *argv[]){
             else{
                 fprintf(stderr, "%s\n", curl_easy_strerror(res));
             }
+            return 4;
         }
     }
     curl_easy_cleanup(curl);
