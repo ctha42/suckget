@@ -5,3 +5,7 @@ A (semi) suckless file downloader
 Usage
 -----------
 suckget takes a URL as an argument, It is snatched using libcurl and then printed to stdout, what you do with your output is up to you.
+
+Build
+-----------
+I've tested this project under WSL and msys2, it should work equally well (if not better) under real *nix targets as well. Running make in the project directory should be sufficient.
